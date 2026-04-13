@@ -1,0 +1,23 @@
+/*
+Author: Brandon Calvario
+*/
+*{
+    margin: 0;
+    padding: 0;
+}
+h1{
+    display: flex;
+    background-color: burlywood;
+    justify-content: center;
+    
+}
+body{
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+}
+footer{
+    background-color: burlywood;
+    justify-content: center;
+    display:flex;
+}
