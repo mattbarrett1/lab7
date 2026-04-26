@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/updateAuthor" method="POST">
+        <h1>Updating Author</h1>
+        <input type="hidden" name="authorId" value="2">
+        <label>First name</label>
+        <input id="authorFirstName" name="firstName" value="<%= authorInfo[0].firstName %>">
+        <br>
+        <label>Last name</label>
+        <input id="authorLastName" name="lastName" value="<%= authorInfo[0].lastName %>">
+        <br>
+        <label>Sex</label>
+        <label><input type="radio" 
+            <% if (authorInfo[0].sex) == 'F' { %>
+            checked
+            <% } %>
+            value="F" name="sex">F</label>
+        <label><input type="radio" 
+            <% if (authorInfo[0].sex) == 'M' { %>
+            checked
+            <% } %>
+            
+            value="M" name="sex">M</label>
+        <br>
+        <label>Date of Birth</label>
+        <input type="date" id="authorBirthday" name="dob" value="<%= authorInfo[0].ISOdob %>">
+        <br>
+        <label>Image URL</label>
+        <input id="authorImage" name="image">
+        <br>
+        <button>Submit</button>
+    </form>
+    
+</body>
+</html>

@@ -14,9 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 //process.env.NP_PWD
 const pool = mysql.createPool({
     host: "sql3.freesqldatabase.com",
-    user: "sql3822765",
-    password: "iihKNtHeil",
-    database: "sql3822765",
+    user: "sql3823452",
+    password: "HMhkV1Y86q",
+    database: "sql3823452",
     connectionLimit: 10,
     waitForConnections: true
 });
@@ -195,4 +195,37 @@ app.post("/newAuthor", async (req, res) =>  {
     const params = [firstName, lastName, sex, birthday, image];
     const [rows] = await pool.query("INSERT INTO authors (firstName, lastName, birthday, sex, portrait) VALUES (1, ?, ?, ?, 1, ?, 1, 1, ?)", params);
     res.redirect("/");
+});
+
+app.get('/allAuthors', async (req, res) => {
+    let sql = `SELECT authorId, firstName, lastName
+               FROM authors
+               ORDER BY lastName`;
+    const [authors] = await pool.query(sql);
+    res.render('allAuthors.ejs', {authors});
+});
+
+app.get('/updateAuthor', async (req, res) => {
+    let authorId = req.query.authorId;
+    let sql = `SELECT *, DATE_FORMAT(dob, '%Y-%m-%d') ISOdob
+               FROM authors
+               WHERE authorId = ?`;
+    const [authorInfo] = await pool.query(sql, [authorId]);
+    res.render('updateAuthor.ejs', {authorInfo});
+});
+app.post('/updateAuthor', async (req, res) => {
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName;
+    let sex = req.body.sex;
+    let dob = req.body.dob;
+    let sql = `UPDATE authors
+               SET
+               firstName = ?,
+               lastName = ?,
+               dob = ?,
+               sex = ?,
+               WHERE authorId = ?`;
+    let sqlParams = [firstName, lastName, dob, sex, authorId];
+    const [rows] = await pool.query(sql, sqlParams);
+    res.redirect("/authors");
 });

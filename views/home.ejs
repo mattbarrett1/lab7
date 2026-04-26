@@ -113,7 +113,12 @@
         <div>
             <a href="/newAuthor">Add Author</a>
         </div>
-
+        <form action="/allAuthors" method="GET">
+            <button>All Authors</button>
+        </form>
+        <form action="/allQuotes">
+            <button>All Quotes</button>
+        </form>
         <script>
             document.querySelector("#searchByKeywordForm").addEventListener("submit", validateKeywordForm);
             function validateKeywordForm() {
